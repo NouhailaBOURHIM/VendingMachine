@@ -6,6 +6,7 @@ public class Main {
         VendingMachine vendingMachine;
         vendingMachine=new VendingMachine();
 
-        System.out.println(vendingMachine.remain(5,10));
+        System.out.println(vendingMachine.getNumbersOfCoins(25).toString());
+
     }
 }

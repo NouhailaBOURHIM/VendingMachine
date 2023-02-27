@@ -27,7 +27,7 @@ public class VendingMachine {
 
     public VendingMachine() {
         this.products = new ArrayList<>();
-        this.coinStock.put(Coin.COIN_10,10);
+        this.coinStock.put(Coin.COIN_10,0);
         this.coinStock.put(Coin.COIN_5,10);
         this.coinStock.put(Coin.COIN_2,10);
         this.coinStock.put(Coin.COIN_1,10);
@@ -79,7 +79,7 @@ public class VendingMachine {
     public int refund(){
         return 0;
     }
-    public Map<Coin,Integer> getNumbersOfCoins(int amount) throws MachineInsufficientCoins
+    public Map<Coin,Integer> getNumbersOfCoins(int amount)
     {
         Map<Coin,Integer> coins=new HashMap<>();
         int numberCoin10;
@@ -126,7 +126,8 @@ public class VendingMachine {
                 amount=amount-numberCoin2*Coin.COIN_2.getValue();
             }
             else{
-                coins.put(Coin.COIN_2,numberCoin2);
+                coins.put(Coin.COIN_2,coinStock.get(Coin.COIN_2));
+                amount=amount-coinStock.get(Coin.COIN_2);
             }
         }
         if(amount>1 && coinStock.get(Coin.COIN_1)>0)
