@@ -41,11 +41,11 @@ public class VendingMachine {
          return product;
      }
 
-    public UserRequest selectProduct(Product productSelected, int givenAmount) throws MachineInsufficientStock, UserInsufficientMoney, NoProductIsSelected, MachineInsufficientBalance, MachineInsufficientCoins {
-        Map<Coin,Integer> coins=new HashMap<>();
+    public UserRequest selectProduct(Product productSelected, int givenAmount) throws MachineOutOfStock, UserInsufficientMoney, NoProductIsSelected, MachineInsufficientBalance, MachineInsufficientCoins {
+        Map<Coin,Integer> coins;
         if(productSelected.getStock()==0)
         {
-            throw new MachineInsufficientStock("No stock is available for this product");
+            throw new MachineOutOfStock("No stock is available for this product");
         }
         if(givenAmount<productSelected.getPrice()){
             throw new UserInsufficientMoney("No full Price");
@@ -76,6 +76,7 @@ public class VendingMachine {
         product.setStock(product.getStock()-1);
     }
 
+    //TODO
     public int refund(){
         return 0;
     }
