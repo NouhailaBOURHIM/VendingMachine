@@ -41,7 +41,7 @@ public class VendingMachine {
          return product;
      }
 
-    public UserRequest selectProduct(Product productSelected, int givenAmount) throws MachineOutOfStock, UserInsufficientMoney, NoProductIsSelected, MachineInsufficientBalance, MachineInsufficientCoins {
+    public UserRequest selectProduct(Product productSelected, int givenAmount) throws MachineOutOfStock, UserInsufficientMoney, MachineInsufficientBalance, MachineInsufficientCoins {
         Map<Coin,Integer> coins;
         if(productSelected.getStock()==0)
         {
@@ -49,10 +49,6 @@ public class VendingMachine {
         }
         if(givenAmount<productSelected.getPrice()){
             throw new UserInsufficientMoney("No full Price");
-        }
-        if(productSelected==null)
-        {
-            throw new NoProductIsSelected("No product is selected, select one");
         }
         int remainingMoney=remain(productSelected.getPrice(),givenAmount);
         coins=getNumbersOfCoins(remainingMoney);
