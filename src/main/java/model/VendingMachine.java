@@ -41,7 +41,7 @@ public class VendingMachine {
          return product;
      }
 
-    public UserRequest selectProduct(Product productSelected, int givenAmount) throws MachineOutOfStock, UserInsufficientMoney, MachineInsufficientBalance, MachineInsufficientCoins {
+    public UserRequest selectProduct(Product productSelected, int givenAmount) throws MachineOutOfStock, UserInsufficientMoney, MachineInsufficientBalance{
         Map<Coin,Integer> coins;
         if(productSelected.getStock()==0)
         {
@@ -97,6 +97,7 @@ public class VendingMachine {
                 coins.put(Coin.COIN_10,coinStock.get(Coin.COIN_10));
                 amount=amount-coinStock.get(Coin.COIN_10)*Coin.COIN_10.getValue();
             }
+            coinStock.put(Coin.COIN_10,coinStock.get(Coin.COIN_10)-numberCoin10);
 
         }
         if(amount>5 && coinStock.get(Coin.COIN_5)>0)
@@ -112,6 +113,7 @@ public class VendingMachine {
                 coins.put(Coin.COIN_5,coinStock.get(Coin.COIN_5));
                 amount=amount-coinStock.get(Coin.COIN_5)*Coin.COIN_5.getValue();
             }
+            coinStock.put(Coin.COIN_5,coinStock.get(Coin.COIN_5)-numberCoin5);
         }
         if(amount>2 && coinStock.get(Coin.COIN_2)>0)
         {
@@ -126,11 +128,13 @@ public class VendingMachine {
                 coins.put(Coin.COIN_2,coinStock.get(Coin.COIN_2));
                 amount=amount-coinStock.get(Coin.COIN_2);
             }
+            coinStock.put(Coin.COIN_2,coinStock.get(Coin.COIN_2)-numberCoin2);
         }
         if(amount>1 && coinStock.get(Coin.COIN_1)>0)
         {
             numberCoin1=amount/Coin.COIN_1.getValue();
             coins.put(Coin.COIN_1, numberCoin1);
+            coinStock.put(Coin.COIN_1,coinStock.get(Coin.COIN_1)-numberCoin1);
         }
         return coins;
     }
